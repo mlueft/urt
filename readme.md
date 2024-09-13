@@ -17,7 +17,6 @@ Transceivers are implemented in /urt/transceiver
 # API
 The API is object oriented and eventdriven.
 
-## Basic example
 ```python
 # This is the most basic example of using URT.
 
@@ -41,6 +40,62 @@ t.setModulation(MODULATIONS.LSB)
 # Runs the main loop.
 # The main loop makes the serial connection working
 # and receives data comming from the transceiver.
+while True:
+    t.main()
+```
+## Properties
+
+Properties are Attributes of the transceiver class representing the transceiver's state. All properties implement an onChange event. So it's easy to notice every change. e.g: If the frequency is changed at the device itself.
+
+A Property has the following Attributes:
+* value - The actual value represented by the property. Setting this value isn't possible on each property. It may raise an Exception .
+* hasChanged - True or False to check if the value has Changed.
+* equals() - To check to values are equal.
+* onChanged - Event manager to organize change messages.
+
+## EventManager
+The EventManager has the following attributes and functions:
+* add() - To add an event handler.
+* remove() - To remove an event handler.
+* has() - To check if an event handler has been added.
+
+The transceiver class implements the following properties:
+* name - The individual name.
+* model - The model.
+* manufacturer - The manufacturer.
+* ptt - The PTT state.
+* frequency - The current working frequency.
+* modulation - The current modulation.
+* squelch - The squelch state.
+* power - The power state.
+
+These properties are likely to change. Not yet properly implemented.
+* smeter - The smeter value.
+* dCentering - The dCentering state.
+* dcsCode - The DCS state.
+* split - The split mode.
+* swr - The swr state.
+
+
+```python
+
+# The event handler for frequency changes.
+def hndFrequency( ev ):
+    # frequency.value is the actual value of the property frequency.
+    print( "frequency : " + str(t.frequency.value))
+
+# We add an event handler to the property frequency.
+t.frequency.onChanged.add(hndFrequency)
+
+# We set the frequency. The new value is sent to the transceiver.
+t.setFrequency(99000000)
+
+# This is not possible:
+# This will raise an exception saying: "Property value can't be changed."
+# t.frequency.value = 99000000
+
+# In the main loop we receive the new frequency from the transceiver
+# and the frequency.onChanged event will be provoked.
 while True:
     t.main()
 ```
