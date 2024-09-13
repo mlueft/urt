@@ -53,7 +53,7 @@ A Property has the following Attributes:
 * equals() - To check to values are equal.
 * onChanged - Event manager to organize change messages.
 
-## EventManager
+### EventManager
 The EventManager has the following attributes and functions:
 * add() - To add an event handler.
 * remove() - To remove an event handler.
