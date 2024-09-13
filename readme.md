@@ -18,7 +18,7 @@ Transceivers are implemented in /urt/transceiver
 The API is object oriented and eventdriven.
 
 ## Basic example
-```
+```python
 # This is the most basic example of using URT.
 
 # Makes classes available.
