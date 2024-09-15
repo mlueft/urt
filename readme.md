@@ -177,6 +177,7 @@ Sets the working frequency of the transceiver. The frequency has to be given in 
 * **setModulation(modulation:int)**
 
 Sets the current modulation of the transceiver. The modulation is represented by the ENUM-Class urt.enums.MODULATIONS.
+
 Not all modulations are supported by all transceiver. setModulation() may raise an ModulationNotSupported exception.
 
 * **pttOn()**
