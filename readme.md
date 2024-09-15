@@ -106,6 +106,7 @@ while True:
 
 The Transceiver class has the following API:
 
+## Properties
 * **name**:String
 Returns the individual name of the transceiver. 
 * **model**:String
@@ -129,6 +130,7 @@ Returns the current frequency of the transceiver. The returned integer valure re
 * split
 * swr
 
+## Functions
 * **lockOn()**
 Locks the transceiver, so no keys or dials can be operated.
 * **lockOff()**
