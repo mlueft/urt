@@ -178,7 +178,6 @@ Sets the working frequency of the transceiver. The frequency has to be given in 
 
 Sets the current modulation of the transceiver. The modulation is represented by the ENUM-Class urt.enums.MODULATIONS.
 
-[!CAUTION]
 Not all modulations are supported by all transceiver. setModulation() may raise an ModulationNotSupported exception.
 
 * **pttOn()**
@@ -189,7 +188,6 @@ Turns on PTT.
 
 Turns off PTT.
 
-[!CAUTION]
 Not all functions are available on all transceiver. Each function can raise an CommandNotSupportedException.
 
 If a command is not allowed in the in the current transceiver constellation a DeviceGuardException may be raised.
