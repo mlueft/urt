@@ -12,7 +12,7 @@ Protocols are implemented in /urt/protocol/
 Transceivers are implemented in /urt/transceiver
 
 ## Supported transceivers
-* Yaesu FT-812
+* Yaesu FT-817
 
 # API
 The API is object oriented and eventdriven.
@@ -81,7 +81,7 @@ These properties are likely to change. Not yet properly implemented.
 
 # The event handler for frequency changes.
 def hndFrequency( ev ):
-    # frequency.value is the actual value of the property frequency.
+    # frequency.value is the actual value of the frequency.
     print( "frequency : " + str(t.frequency.value))
 
 # We add an event handler to the property frequency.
@@ -99,3 +99,58 @@ t.setFrequency(99000000)
 while True:
     t.main()
 ```
+
+# API
+
+## Transceiver
+
+The Transceiver class has the following API:
+
+* **name**:String
+Returns the individual name of the transceiver. 
+* **model**:String
+Returns the manufacturer's device name. The model of the transceiver.
+* **manufacturer**:String
+Returns the manufactuer's name of the transceiver.
+* **squelch**:Bool
+Returns the state of the squelch. True - Noise is surpressed by squelch, otherwise False.
+* **ptt**:Bool
+Returns the PTT-State. True - PTT is pressed, otherwise False.
+* **power**:Bool
+  Return the power state of the transceiver. True - The transceiver is ON, otherwise False.
+* **modulation**:Enum
+Returns the current modulation of the transceiver. The returned integer value represents an Enum value of urt.enums.MODULATIONS.
+* **frequency**:Int
+Returns the current frequency of the transceiver. The returned integer valure represents the frequency in Hz.
+
+* smeter
+* dCentering
+* dcsCode
+* split
+* swr
+
+* **lockOn()**
+Locks the transceiver, so no keys or dials can be operated.
+* **lockOff()**
+Unlocks the transceiver, so all keys or dials can be operated.
+* **lockToggle()**
+Flips the lock state of the transceiver.
+* **splitOn()**
+Turns on the split mode of the transceiver.
+* **splitOff()**
+Turns off the split mode of the transceiver.
+* **splitToggle()**
+Flips the split mode of the transceiver.  
+* **setFrequency(frequency:int)**
+Sets the working frequency of the transceiver. The frequency has to be given in Hz.
+* **setModulation(modulation:int)**
+Sets the current modulation of the transceiver. The modulation is represented by the ENUM-Class urt.enums.MODULATIONS.
+Not all modulations are supported by all transceiver. setModulation() may raise an ModulationNotSupported exception.
+* **pttOn()**
+Turns on PTT.
+* **pttOff()**
+Turns off PTT.
+
+Not all functions are available on all transceiver. Each function can raise an CommandNotSupportedException.
+
+If a command is not allowed in the in the current transceiver constellation a DeviceGuardException may be raised.
