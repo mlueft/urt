@@ -22,7 +22,7 @@ The API is object oriented and eventdriven.
 
 # Makes classes available.
 from lib.urt.transceivers.yaesu.FT_817 import FT_817
-from lib.urt.ENUMS import MODULATION
+from lib.urt.enums import MODULATION
 
 # Creates a FT-817 transceiver
 t = FT_817()
