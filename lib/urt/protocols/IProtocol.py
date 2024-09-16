@@ -2,7 +2,7 @@
 class IProtocol():
 
 	def __init__(self):
-		pass
+		self.__initialized = False
 
 	def initialize(self):
 		pass
@@ -33,7 +33,9 @@ class IProtocol():
 		pass
 
 	def main(self):
-		pass
+		if self.__initialized == False:
+			self.initialize()
+			self.__initialized = True
 		
 	def createModulations(self):
 		pass

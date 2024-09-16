@@ -2,14 +2,20 @@
 class IPort():
 
     def __init__(self):
-        self._type = None
-    
+        self._type         = None
+        self.__initialized = False
+
     @property
     def type(self):
         return self._type
     
-    def main(self):
+    def initialize(self):
         pass
+    
+    def main(self):
+        if self.__initialized == False:
+            self.initialize()
+            self.__initialized = True
 
     def getPropertyNames(self):
         pass

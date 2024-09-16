@@ -26,7 +26,7 @@ class Serial(IPort):
         self.__port.dsrdtr    = False
 
     def main(self):
-        pass
+        super().main()
 
     def getPropertyNames(self):
         return[

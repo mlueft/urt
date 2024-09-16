@@ -2,7 +2,7 @@
 class ITransceiver():
 
     def __init__(self):
-        pass
+        self.__initialized = False
 
     # =========================================
     # DEVICE
@@ -19,9 +19,17 @@ class ITransceiver():
     def device(self, value):
         pass
 
-    def main(self):
+    def initialize(self):
         pass
     
+    def main(self):
+        if self.__initialized == False:
+            self.initialize()
+            self.__initialized = True
+    
+        if self.device:
+            self.device.main()
+
     def updateDeviceState(self):
         raise("updateDeviceState() not implemented in transceiver class!");
 

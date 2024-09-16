@@ -88,7 +88,6 @@ class Transceiver(ITransceiver):
 
         self._device = value
         self.__connectDevice(self._device)
-        self._device.initialize()
 
     # =========================================
     # DEVICE HANDLERS
@@ -136,8 +135,8 @@ class Transceiver(ITransceiver):
 
 
     def main(self):
-        if self.device:
-            self.device.main()
+        
+        super().main()
 
         # Request information
         if self.__lastUpdateTime == None or time.time()-self.__lastUpdateTime > 0.5:

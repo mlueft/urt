@@ -117,8 +117,7 @@ class FT_817(B5):
             self.dCentering.overrideValue(dCentering)
             self.dcsCode.overrideValue(dcsCode)
             self.squelch.overrideValue(squelch)
-
-        if command == COMMAND.READ_TX_STATE:
+        elif command == COMMAND.READ_TX_STATE:
             pometer = int((0b00001111 & data[0])>0)
             split   = int((0b00100000 & data[0])>5)
             swr     = int((0b01000000 & data[0])>6)
@@ -127,9 +126,11 @@ class FT_817(B5):
             self.split.overrideValue(split)
             self.swr.overrideValue(swr)
             self.ptt.overrideValue(ptt)
-
-        if command == COMMAND.READ_FREQ_MODE:
+        elif command == COMMAND.READ_FREQ_MODE:
             frequency = "{:02X}{:02X}{:02X}{:02X}".format(data[0],data[1],data[2],data[3])
             modulation = self.decodeModulation(data[4])
             self.frequency.overrideValue(int(frequency)*10)
             self.modulation.overrideValue(modulation)
+        else:
+            #print("<="+ str(command) +" = "+str(data))
+            pass

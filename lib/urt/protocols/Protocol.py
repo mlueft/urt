@@ -13,7 +13,7 @@ class Protocol(IProtocol):
 
 
 	def __init__(self):
-	
+		super().__init__()
 		self.__port = self.createPort()
 
 		self._modulations = self.createModulations()
@@ -37,6 +37,7 @@ class Protocol(IProtocol):
 		self.modulation   = Property(True)
 		
 		self.sendDelay    = 0.2
+
 
 	# ==========================================
 	# CONNECTION
@@ -71,11 +72,6 @@ class Protocol(IProtocol):
 	def _decodeAnswer(self, command,data):
 		raise Exception("_decodeAnswer() not implemented in protocol class!")
 
-	def main(self):
-		
-		if self.__port:
-			self.__port.main()
-		
 	def createModulations(self):
 		raise Exception("getModes() not implemented in protocol class!")
 	
@@ -84,6 +80,12 @@ class Protocol(IProtocol):
 	
 	def createPilottones(self):
 		raise Exception("createPilottones () not implemented in protocol class!")
+
+	def main(self):
+		super().main()
+		
+		if self.__port:
+			self.__port.main()
 
 	## Prepairs data to be send to the device.
 	#  This function returns a list of commands to send.
