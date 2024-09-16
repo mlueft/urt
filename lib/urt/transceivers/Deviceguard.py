@@ -1,8 +1,11 @@
 from .ITransceiver import ITransceiver
 from ..Exceptions import DeviceGuardException
+from ..Exceptions import ModulationException
+from ..Exceptions import FrequencyException
+from ..Exceptions import PTTException
 from ..enums import MODULATION, COMMAND
 
-# This class is just for use in this file.
+# This enum class is just for use in this file.
 class ATTRIBUTES():
     FREQUENCY  = 0x01
     TX         = 0x02
@@ -33,7 +36,7 @@ class Deviceguard(ITransceiver):
                 if f.modulationSupported(value):
                     result.append(f)
             else:
-                raise Exception("Attribute not supported in Deviceguard!")
+                raise DeviceGuardException("Attribute not supported in Deviceguard!")
         return result    
 
     def lockOn(self):
@@ -71,11 +74,11 @@ class Deviceguard(ITransceiver):
         # If we get no frequency newFrequency is not supported by the device
         # or range definition is not complete in device class
         if len(frequency) == 0:
-            raise DeviceGuardException("Frequency not supported or frequency range definition is not complete in device class!")
+            raise FrequencyException("Frequency not supported or frequency range definition is not complete in device class!")
 
         # If we get more than one frequency regions are overlapping.
         if len(frequency) > 1:
-            raise DeviceGuardException("Frequency range definitions are overlapping in device class!")
+            raise FrequencyException("Frequency range definitions are overlapping in device class!")
 
         # Id there a forced modulation for this range?
         if frequency[0].forcedModulation != None:
@@ -96,7 +99,7 @@ class Deviceguard(ITransceiver):
             return self.__device.generateCommand( COMMAND.SET_MODULATION, modulation )
 
         # Otherwise we raise an exception.            
-        raise DeviceGuardException("Frequency not allowed with current modulation!")
+        raise FrequencyException("Frequency not allowed with current modulation!")
 
     def setModulation(self, newModulation):
         # Is the new modulation allowed at the current frequency?
@@ -107,18 +110,18 @@ class Deviceguard(ITransceiver):
         # If we get not frequency, but the device is already working with it
         # frequency range definition is not complete.
         if len(frequency) == 0:
-            raise DeviceGuardException("Frequency range definition is not complete in device class!")
+            raise FrequencyException("Frequency range definition is not complete in device class!")
 
         # If we get more than one frequency regions are overlapping.
         if len(frequency) > 1:
-            raise DeviceGuardException("Frequency range definitions are overlapping in device class!")
+            raise FrequencyException("Frequency range definitions are overlapping in device class!")
         
         # Id the new modulation supported in this range?
         supported = frequency[0].modulationSupported(newModulation)
 
         # If not supported we raise an exception.
         if not supported:
-            raise DeviceGuardException("Modulation not allowed at this frequency!")
+            raise ModulationException("Modulation not allowed at this frequency!")
 
         return []
 
@@ -143,15 +146,15 @@ class Deviceguard(ITransceiver):
         # If we get not frequency, but the device is already working with it
         # frequency range definition is not complete.
         if len(frequency) == 0:
-            raise DeviceGuardException("Frequency range definition is not complete in device class!")
+            raise FrequencyException("Frequency range definition is not complete in device class!")
 
         # If we get more than one frequency regions are overlapping.
         if len(frequency) > 1:
-            raise DeviceGuardException("Frequency range definitions are overlapping in device class!")
+            raise FrequencyException("Frequency range definitions are overlapping in device class!")
         
         # If tx is not allower we raise an exception
         if not frequency[0].tx:
-            raise DeviceGuardException("PTT is not allowed with the current frequency!")
+            raise PTTException("PTT is not allowed with the current frequency!")
 
         return []
 

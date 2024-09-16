@@ -20,21 +20,21 @@ class Protocol(IProtocol):
 		self._commands    = self.createCommands()
 		self._pilottones  = self.createPilottones()
 
-		self.model        = Property(True)
-		self.manufacturer = Property(True)
+		self.model        = Property(True,self)
+		self.manufacturer = Property(True,self)
 		
-		self.smeter       = Property(True)
-		self.dCentering   = Property(True)
-		self.dcsCode      = Property(True)
-		self.squelch      = Property(True)
+		self.smeter       = Property(True,self)
+		self.dCentering   = Property(True,self)
+		self.dcsCode      = Property(True,self)
+		self.squelch      = Property(True,self)
 
-		self.power       = Property(True)
-		self.split       = Property(True)
-		self.swr         = Property(True)
-		self.ptt         = Property(True)
+		self.power       = Property(True,self)
+		self.split       = Property(True,self)
+		self.swr         = Property(True,self)
+		self.ptt         = Property(True,self)
 
-		self.frequency    = Property(True)
-		self.modulation   = Property(True)
+		self.frequency    = Property(True,self)
+		self.modulation   = Property(True,self)
 		
 		self.sendDelay    = 0.2
 

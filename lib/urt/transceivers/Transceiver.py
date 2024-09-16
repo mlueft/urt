@@ -11,21 +11,23 @@ class Transceiver(ITransceiver):
 
         self.__lastUpdateTime = None
 
-        self.name         = Property()
+        self.name         = Property(False,self)
 
-        self.model        = Property(True)
-        self.manufacturer = Property(True)
-        self.smeter       = Property(True)
-        self.dCentering   = Property(True)
-        self.dcsCode      = Property(True)
-        self.squelch      = Property(True)
-        self.power        = Property(True)
-        self.split        = Property(True)
-        self.swr          = Property(True)
-        self.ptt          = Property(True)
-        self.frequency    = Property(True)
-        self.modulation   = Property(True)
-        
+        self.model        = Property(True,self)
+        self.manufacturer = Property(True,self)
+        self.smeter       = Property(True,self)
+        self.dCentering   = Property(True,self)
+        self.dcsCode      = Property(True,self)
+        self.squelch      = Property(True,self)
+        self.power        = Property(True,self)
+        self.split        = Property(True,self)
+        self.swr          = Property(True,self)
+        self.ptt          = Property(True,self)
+        self.frequency    = Property(True,self)
+        self.modulation   = Property(True,self)
+        # seconds
+        self.updateInterval = 0.5
+
         self._device = None
         self.device = self.createDevice()
         self._deviceguard = self.createDeviceguard()
@@ -139,7 +141,7 @@ class Transceiver(ITransceiver):
         super().main()
 
         # Request information
-        if self.__lastUpdateTime == None or time.time()-self.__lastUpdateTime > 0.5:
+        if self.__lastUpdateTime == None or time.time()-self.__lastUpdateTime > self.updateInterval:
             self.updateDeviceState()
             self.__lastUpdateTime = time.time()
 

@@ -107,30 +107,34 @@ class FT_817(B5):
         return 1
 
     def _decodeAnswer(self, command,data):
+        
         #print("<="+ str(command) +" = "+str(data))
         if command == COMMAND.READ_RX_STATE:
             smeter     = int((0b00001111 & data[0])>0)
-            dCentering = int((0b00100000 & data[0])>5)
+            dCentering = int((0b00100000 & data[0])>5)==0
             dcsCode    = int((0b01000000 & data[0])>6)
-            squelch    = int((0b10000000 & data[0])>7)
+            squelch    = int((0b10000000 & data[0])>7)==1
             self.smeter.overrideValue(smeter)
             self.dCentering.overrideValue(dCentering)
             self.dcsCode.overrideValue(dcsCode)
             self.squelch.overrideValue(squelch)
+
         elif command == COMMAND.READ_TX_STATE:
             pometer = int((0b00001111 & data[0])>0)
-            split   = int((0b00100000 & data[0])>5)
-            swr     = int((0b01000000 & data[0])>6)
-            ptt     = int((0b10000000 & data[0])>7)
+            split   = int((0b00100000 & data[0])>5)==0
+            swr     = int((0b01000000 & data[0])>6)==0
+            ptt     = int((0b10000000 & data[0])>7)==0
             self.power.overrideValue(pometer)
             self.split.overrideValue(split)
             self.swr.overrideValue(swr)
             self.ptt.overrideValue(ptt)
+
         elif command == COMMAND.READ_FREQ_MODE:
             frequency = "{:02X}{:02X}{:02X}{:02X}".format(data[0],data[1],data[2],data[3])
             modulation = self.decodeModulation(data[4])
             self.frequency.overrideValue(int(frequency)*10)
             self.modulation.overrideValue(modulation)
+
         else:
             #print("<="+ str(command) +" = "+str(data))
             pass

@@ -36,18 +36,30 @@ class EventManager():
         for handler in self.__handlers:
             handler(event)
             
-class ChangeEvent():
-    def __init__(self):
-        pass
+class ChangedEvent():
+    def __init__(self,source,value):
+        self.__source = source
+        self.__value = value
+
+    @property
+    def source(self):
+        return self.__source
+    
+    @property
+    def value(self):
+        return self.__value
 
 class Property():
 
-    def __init__(self,readonly = False):
+    def __init__(self,readonly = False,eventSource=None):
         #print("__init__()")
         self._value = None
         self.onChanged = EventManager()
         self._hasChanged = False
         self.__readonly = readonly
+        self.__eventSource = self
+        if eventSource:
+            self.__eventSource = eventSource
 
     @property
     def value(self):
@@ -72,7 +84,7 @@ class Property():
         self._hasChanged = not self.equals(value)
         self._value = value
         if self._hasChanged:
-            self.onChanged.provoke(ChangeEvent())
+            self.onChanged.provoke(ChangedEvent(self.__eventSource,self._value))
         
     """
     def __eq__(self,cValue):
