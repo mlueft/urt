@@ -2,8 +2,8 @@ from ..Transceiver import Transceiver
 from ...protocols.b5 import FT_817 as PFT_817
 from ..Deviceguard import Deviceguard_FT_817
 from ..Deviceguard import FrequencyRange
-from ...ENUMS import MODULATIONS
-from ...ENUMS import COMMANDS
+from ...enums import MODULATION
+from ...enums import COMMAND
 
 class B5(Transceiver):
 
@@ -17,7 +17,7 @@ class B5(Transceiver):
 
     def requestRXState(self):
         commandlist = []
-        command = COMMANDS.READ_RX_STATE
+        command = COMMAND.READ_RX_STATE
 
         # We raise an Exception if the command is not supported.
         self.device.assumeCommandSupport(command)
@@ -31,7 +31,7 @@ class B5(Transceiver):
 
     def requestTXState(self):
         commandlist = []
-        command = COMMANDS.READ_TX_STATE
+        command = COMMAND.READ_TX_STATE
 
         # We raise an Exception if the command is not supported.
         self.device.assumeCommandSupport(command)
@@ -45,7 +45,7 @@ class B5(Transceiver):
 
     def requestFrequency(self):
         commandlist = []
-        command = COMMANDS.READ_FREQ_MODE
+        command = COMMAND.READ_FREQ_MODE
 
         # We raise an Exception if the command is not supported.
         self.device.assumeCommandSupport(command)

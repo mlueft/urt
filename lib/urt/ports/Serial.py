@@ -1,5 +1,5 @@
 import serial
-from ..ENUMS import PORTTYPES
+from ..enums import PORTTYPE
 from . import IPort
 
 class Serial(IPort):
@@ -15,7 +15,7 @@ class Serial(IPort):
 
     def __init__(self):
         super().__init__()
-        self._type = PORTTYPES.SERIAL
+        self._type = PORTTYPE.SERIAL
 
         self.__port = serial.Serial()
         self.__port.parity    = serial.PARITY_NONE

@@ -22,7 +22,7 @@ The API is object oriented and eventdriven.
 
 # Makes classes available.
 from lib.urt.transceivers.yaesu.FT_817 import FT_817
-from lib.urt.ENUMS import MODULATIONS
+from lib.urt.ENUMS import MODULATION
 
 # Creates a FT-817 transceiver
 t = FT_817()
@@ -35,7 +35,7 @@ t.device.port.setProperty("baudrate",9600)
 t.setFrequency(14101000)
 
 # Sets the working modulation of the transceiver.
-t.setModulation(MODULATIONS.LSB)
+t.setModulation(MODULATION.LSB)
 
 # Runs the main loop.
 # The main loop makes the serial connection working
@@ -133,7 +133,7 @@ Returns the PTT-State. True - PTT is pressed, otherwise False.
 
 * **modulation**:Enum
 
-Returns the current modulation of the transceiver. The returned integer value represents an Enum value of urt.enums.MODULATIONS.
+Returns the current modulation of the transceiver. The returned integer value represents an Enum value of urt.enums.MODULATION.
 
 * **frequency**:Int
   
@@ -176,7 +176,7 @@ Sets the working frequency of the transceiver. The frequency has to be given in 
 
 * **setModulation(modulation:int)**
 
-Sets the current modulation of the transceiver. The modulation is represented by the ENUM-Class urt.enums.MODULATIONS.
+Sets the current modulation of the transceiver. The modulation is represented by the ENUM-Class urt.enums.MODULATION.
 
 Not all modulations are supported by all transceiver. setModulation() may raise an ModulationNotSupported exception.
 

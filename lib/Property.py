@@ -36,7 +36,6 @@ class EventManager():
         for handler in self.__handlers:
             handler(event)
             
-
 class ChangeEvent():
     def __init__(self):
         pass
@@ -60,6 +59,7 @@ class Property():
             raise Exception("Property value can't be changed.")
         self.overrideValue(value)
     
+    @property
     def hasChanged(self):
         result = self._hasChanged
         self._hasChanged = false

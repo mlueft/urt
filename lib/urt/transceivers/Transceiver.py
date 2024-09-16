@@ -1,5 +1,5 @@
 import time
-from ..ENUMS import COMMANDS
+from ..enums import COMMAND
 from lib.Property import Property
 from .ITransceiver import ITransceiver
 
@@ -156,7 +156,7 @@ class Transceiver(ITransceiver):
 
     def lockOn(self):
         commandlist = []
-        command = COMMANDS.LOCK_ON
+        command = COMMAND.LOCK_ON
 
         # We raise an Exception if the command is not supported.
         self.device.assumeCommandSupport(command)
@@ -170,7 +170,7 @@ class Transceiver(ITransceiver):
 
     def lockOff(self):
         commandlist = []
-        command = COMMANDS.LOCK_OFF
+        command = COMMAND.LOCK_OFF
 
         # We raise an Exception if the command is not supported.
         self.device.assumeCommandSupport(command)
@@ -184,7 +184,7 @@ class Transceiver(ITransceiver):
 
     def lockToggle(self):
         commandlist = []
-        command = COMMANDS.LOCK_TOGGLE
+        command = COMMAND.LOCK_TOGGLE
 
         # We raise an Exception if the command is not supported.
         self.device.assumeCommandSupport(command)
@@ -198,7 +198,7 @@ class Transceiver(ITransceiver):
 
     def splitOn(self):
         commandlist = []
-        command = COMMANDS.SPLIT_ON
+        command = COMMAND.SPLIT_ON
 
         # We raise an Exception if the command is not supported.
         self.device.assumeCommandSupport(command)
@@ -212,7 +212,7 @@ class Transceiver(ITransceiver):
 
     def splitOff(self):
         commandlist = []
-        command = COMMANDS.SPLIT_OFF
+        command = COMMAND.SPLIT_OFF
 
         # We raise an Exception if the command is not supported.
         self.device.assumeCommandSupport(command)
@@ -226,7 +226,7 @@ class Transceiver(ITransceiver):
 
     def splitToggle(self):
         commandlist = []
-        command = COMMANDS.SPLIT_TOGGLE
+        command = COMMAND.SPLIT_TOGGLE
 
         # We raise an Exception if the command is not supported.
         self.device.assumeCommandSupport(command)
@@ -240,7 +240,7 @@ class Transceiver(ITransceiver):
 
     def setFrequency(self, value):
         commandlist = []
-        command = COMMANDS.SET_FREQUENCY
+        command = COMMAND.SET_FREQUENCY
 
         # We raise an Exception if the command is not supported.
         self.device.assumeCommandSupport(command)
@@ -254,7 +254,7 @@ class Transceiver(ITransceiver):
 
     def setModulation(self, value):
         commandlist = []
-        command = COMMANDS.SET_MODULATION
+        command = COMMAND.SET_MODULATION
 
         # We raise an Exception if the command is not supported.
         self.device.assumeCommandSupport(command)
@@ -270,7 +270,7 @@ class Transceiver(ITransceiver):
 
     def pttOn(self):
         commandlist = []
-        command = COMMANDS.PTT_ON
+        command = COMMAND.PTT_ON
 
         # We raise an Exception if the command is not supported.
         self.device.assumeCommandSupport(command)
@@ -284,7 +284,7 @@ class Transceiver(ITransceiver):
 
     def pttOff(self):
         commandlist = []
-        command = COMMANDS.PTT_OFF
+        command = COMMAND.PTT_OFF
 
         # We raise an Exception if the command is not supported.
         self.device.assumeCommandSupport(command)

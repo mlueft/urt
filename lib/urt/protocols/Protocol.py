@@ -4,8 +4,8 @@ from lib.Property import Property
 
 from . import IProtocol
 from ..ports.Serial import Serial
-from ..ENUMS import COMMANDS
-from ..ENUMS import MODULATIONS
+from ..enums import COMMAND
+from ..enums import MODULATION
 from ..Exceptions import CommandNotSupportedException
 from ..Exceptions import ModulationNotSupported
 
@@ -108,43 +108,43 @@ class Protocol(IProtocol):
 
 	def encodeCommand(self,command):
 		
-		if command == COMMANDS.LOCK_ON: 
+		if command == COMMAND.LOCK_ON: 
 			return self._commands.LOCK_ON
 		
-		if command == COMMANDS.LOCK_OFF: 
+		if command == COMMAND.LOCK_OFF: 
 			return self._commands.LOCK_OFF
 		
-		if command == COMMANDS.LOCK_TOGGLE:
+		if command == COMMAND.LOCK_TOGGLE:
 			return self._commands.LOCK_TOGGLE
 		
-		if command == COMMANDS.SPLIT_ON:
+		if command == COMMAND.SPLIT_ON:
 			return self._commands.SPLIT_ON
 		
-		if command == COMMANDS.SPLIT_OFF:
+		if command == COMMAND.SPLIT_OFF:
 			return self._commands.SPLIT_OFF
 		
-		if command == COMMANDS.SPLIT_TOGGLE:
+		if command == COMMAND.SPLIT_TOGGLE:
 			return self._commands.SPLIT_TOGGLE
 		
-		if command == COMMANDS.SET_FREQUENCY:
+		if command == COMMAND.SET_FREQUENCY:
 			return self._commands.SET_FREQUENCY
 		
-		if command == COMMANDS.SET_MODULATION:
+		if command == COMMAND.SET_MODULATION:
 			return self._commands.SET_MODULATION
 		
-		if command == COMMANDS.READ_RX_STATE:
+		if command == COMMAND.READ_RX_STATE:
 			return self._commands.READ_RX_STATE
 		
-		if command == COMMANDS.READ_TX_STATE:
+		if command == COMMAND.READ_TX_STATE:
 			return self._commands.READ_TX_STATE
 
-		if command == COMMANDS.READ_FREQ_MODE:
+		if command == COMMAND.READ_FREQ_MODE:
 			return self._commands.READ_FREQ_MODE
 
-		if command == COMMANDS.PTT_ON:
+		if command == COMMAND.PTT_ON:
 			return self._commands.PTT_ON
 
-		if command == COMMANDS.PTT_OFF:
+		if command == COMMAND.PTT_OFF:
 			return self._commands.PTT_OFF
 
 		return None
@@ -152,75 +152,75 @@ class Protocol(IProtocol):
 	def decodeCommand(self,command):
 		
 		if command == self._commands.LOCK_ON: 
-			return COMMANDS.LOCK_ON
+			return COMMAND.LOCK_ON
 		
 		if command == self._commands.LOCK_OFF: 
-			return COMMANDS.LOCK_OFF
+			return COMMAND.LOCK_OFF
 		
 		if command == self._commands.LOCK_TOGGLE:
-			return COMMANDS.LOCK_TOGGLE
+			return COMMAND.LOCK_TOGGLE
 		
 		if command == self._commands.SPLIT_ON:
-			return COMMANDS.SPLIT_ON
+			return COMMAND.SPLIT_ON
 		
 		if command == self._commands.SPLIT_OFF:
-			return COMMANDS.SPLIT_OFF
+			return COMMAND.SPLIT_OFF
 		
 		if command == self._commands.SPLIT_TOGGLE:
-			return COMMANDS.SPLIT_TOGGLE
+			return COMMAND.SPLIT_TOGGLE
 		
 		if command == self._commands.SET_FREQUENCY:
-			return COMMANDS.SET_FREQUENCY
+			return COMMAND.SET_FREQUENCY
 		
 		if command == self._commands.SET_MODULATION:
-			return COMMANDS.SET_MODULATION
+			return COMMAND.SET_MODULATION
 		
 		if command == self._commands.READ_RX_STATE:
-			return COMMANDS.READ_RX_STATE
+			return COMMAND.READ_RX_STATE
 		
 		if command == self._commands.READ_TX_STATE:
-			return COMMANDS.READ_TX_STATE
+			return COMMAND.READ_TX_STATE
 
 		if command == self._commands.READ_FREQ_MODE:
-			return COMMANDS.READ_FREQ_MODE
+			return COMMAND.READ_FREQ_MODE
 
 		if command == self._commands.PTT_ON:
-			return COMMANDS.PTT_ON
+			return COMMAND.PTT_ON
 
 		if command == self._commands.PTT_OFF:
-			return COMMANDS.PTT_OFF
+			return COMMAND.PTT_OFF
 		
 		return None
 
 	def encodeModulation(self,modulation):
-		if modulation == MODULATIONS.LSB: 
+		if modulation == MODULATION.LSB: 
 			return self._modulations.LSB
 		
-		if modulation == MODULATIONS.USB: 
+		if modulation == MODULATION.USB: 
 			return self._modulations.USB
 		
-		if modulation == MODULATIONS.CW: 
+		if modulation == MODULATION.CW: 
 			return self._modulations.CW
 		
-		if modulation == MODULATIONS.CWR: 
+		if modulation == MODULATION.CWR: 
 			return self._modulations.CWR
 		
-		if modulation == MODULATIONS.AM: 
+		if modulation == MODULATION.AM: 
 			return self._modulations.AM
 		
-		if modulation == MODULATIONS.FM: 
+		if modulation == MODULATION.FM: 
 			return self._modulations.FM
 		
-		if modulation == MODULATIONS.DIG: 
+		if modulation == MODULATION.DIG: 
 			return self._modulations.DIG
 		
-		if modulation == MODULATIONS.PKT: 
+		if modulation == MODULATION.PKT: 
 			return self._modulations.PKT
 		
-		if modulation == MODULATIONS.FMN: 
+		if modulation == MODULATION.FMN: 
 			return self._modulations.FMN
 		
-		if modulation == MODULATIONS.FMW: 
+		if modulation == MODULATION.FMW: 
 			return self._modulations.FMW
 		
 		return None
@@ -228,34 +228,34 @@ class Protocol(IProtocol):
 	def decodeModulation(self,modulation):
 		#print(modulation)
 		if modulation == self._modulations.LSB: 
-			return MODULATIONS.LSB
+			return MODULATION.LSB
 		
 		if modulation == self._modulations.USB: 
-			return MODULATIONS.USB
+			return MODULATION.USB
 		
 		if modulation == self._modulations.CW: 
-			return MODULATIONS.CW
+			return MODULATION.CW
 		
 		if modulation == self._modulations.CWR: 
-			return MODULATIONS.CWR
+			return MODULATION.CWR
 		
 		if modulation == self._modulations.AM: 
-			return MODULATIONS.AM
+			return MODULATION.AM
 		
 		if modulation == self._modulations.FM: 
-			return MODULATIONS.FM
+			return MODULATION.FM
 		
 		if modulation == self._modulations.DIG: 
-			return MODULATIONS.DIG
+			return MODULATION.DIG
 		
 		if modulation == self._modulations.PKT: 
-			return MODULATIONS.PKT
+			return MODULATION.PKT
 		
 		if modulation == self._modulations.FMN: 
-			return MODULATIONS.FMN
+			return MODULATION.FMN
 		
 		if modulation == self._modulations.FMW: 
-			return MODULATIONS.FMW
+			return MODULATION.FMW
 		
 		return None
 
@@ -268,7 +268,7 @@ class Protocol(IProtocol):
 	#  @param commandlist   A list with commands send to the device.
 	#                       [
 	#                         [ENUM-Value, data package ],
-	#                         [COMMANDS.SET_FREQUENCY, [000,110,200,010,01]]
+	#                         [COMMAND.SET_FREQUENCY, [000,110,200,010,01]]
 	#                       ]
 	#                       The data package is send unchanged.
 	def write(self,commandlist):

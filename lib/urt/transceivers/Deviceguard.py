@@ -1,6 +1,6 @@
 from .ITransceiver import ITransceiver
 from ..Exceptions import DeviceGuardException
-from ..ENUMS import MODULATIONS, COMMANDS
+from ..enums import MODULATION, COMMAND
 
 # This class is just for use in this file.
 class ATTRIBUTES():
@@ -79,7 +79,7 @@ class Deviceguard(ITransceiver):
 
         # Id there a forced modulation for this range?
         if frequency[0].forcedModulation != None:
-            return self.__device.generateCommand( COMMANDS.SET_MODULATION, frequency[0].forcedModulation )
+            return self.__device.generateCommand( COMMAND.SET_MODULATION, frequency[0].forcedModulation )
 
         # Is the current modulation supported by this frequency range?
         supported = frequency[0].modulationSupported(self.__device.modulation.value)
@@ -93,7 +93,7 @@ class Deviceguard(ITransceiver):
 
         # If we found any we switch and everything is OK.
         if modulation != None:
-            return self.__device.generateCommand( COMMANDS.SET_MODULATION, modulation )
+            return self.__device.generateCommand( COMMAND.SET_MODULATION, modulation )
 
         # Otherwise we raise an exception.            
         raise DeviceGuardException("Frequency not allowed with current modulation!")
@@ -170,35 +170,35 @@ class FrequencyRange():
         self.forcedModulation = forcedModulation
 
     def getAnyModulation(self):
-        if self.modulations & MODULATIONS.LSB:
-            return MODULATIONS.LSB
+        if self.modulations & MODULATION.LSB:
+            return MODULATION.LSB
 
-        if self.modulations & MODULATIONS.USB:
-            return MODULATIONS.USB
+        if self.modulations & MODULATION.USB:
+            return MODULATION.USB
 
-        if self.modulations & MODULATIONS.AM:
-            return MODULATIONS.AM
+        if self.modulations & MODULATION.AM:
+            return MODULATION.AM
 
-        if self.modulations & MODULATIONS.FM:
-            return MODULATIONS.FM
+        if self.modulations & MODULATION.FM:
+            return MODULATION.FM
 
-        if self.modulations & MODULATIONS.FMN:
-            return MODULATIONS.FMW
+        if self.modulations & MODULATION.FMN:
+            return MODULATION.FMW
 
-        if self.modulations & MODULATIONS.FMW:
-            return MODULATIONS.FMW
+        if self.modulations & MODULATION.FMW:
+            return MODULATION.FMW
 
-        if self.modulations & MODULATIONS.CW:
-            return MODULATIONS.CW
+        if self.modulations & MODULATION.CW:
+            return MODULATION.CW
 
-        if self.modulations & MODULATIONS.CWR:
-            return MODULATIONS.CWR
+        if self.modulations & MODULATION.CWR:
+            return MODULATION.CWR
 
-        if self.modulations & MODULATIONS.DIG:
-            return MODULATIONS.DIG
+        if self.modulations & MODULATION.DIG:
+            return MODULATION.DIG
 
-        if self.modulations & MODULATIONS.PKT:
-            return MODULATIONS.PKT
+        if self.modulations & MODULATION.PKT:
+            return MODULATION.PKT
 
         return None
 

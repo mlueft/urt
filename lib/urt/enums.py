@@ -1,5 +1,5 @@
 
-class PILOTTONES():
+class PILOTTONE():
     OFF       = 1
     DCS       = 2
     DCS_ENC   = 4
@@ -17,7 +17,7 @@ class PILOTTONES():
         self.CTCSS_ENC = None
         self.CTCSS_DEC = None
 
-class MODULATIONS():
+class MODULATION():
     # These are not the protocol codes!
     LSB  = 1
     USB  = 2
@@ -42,7 +42,7 @@ class MODULATIONS():
         self.FMN  = None
         self.FMW  = None
 
-class COMMANDS():
+class COMMAND():
 
     # These are not the codes of the
     # cat protocol!
@@ -80,6 +80,6 @@ class COMMANDS():
         self.PTT_ON         = None
         self.PTT_OFF        = None
 
-class PORTTYPES():
+class PORTTYPE():
 
     SERIAL   = 0x01

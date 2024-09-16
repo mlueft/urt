@@ -1,7 +1,7 @@
 from ..b5 import B5
-from ...ENUMS import COMMANDS
-from ...ENUMS import MODULATIONS
-from ...ENUMS import PILOTTONES
+from ...enums import COMMAND
+from ...enums import MODULATION
+from ...enums import PILOTTONE
 
 class FT_817(B5):
 
@@ -15,7 +15,7 @@ class FT_817(B5):
     def createModulations(self):
         # These are the codes of the
         # cat protocol!
-        result = MODULATIONS()
+        result = MODULATION()
         result.LSB = 0x00
         result.USB = 0x01
         result.CW  = 0x02
@@ -30,7 +30,7 @@ class FT_817(B5):
     def createCommands(self):
         # These are the codes of the
         # cat protocol!
-        result = COMMANDS()
+        result = COMMAND()
         result.LOCK_ON        = 0x00
         result.LOCK_OFF       = 0x80
         result.SPLIT_ON       = 0x02
@@ -45,21 +45,21 @@ class FT_817(B5):
         return result
 
     def createPilottones(self):
-        result = PILOTTONES()
+        result = PILOTTONE()
         result.OFF   = 0x8A
         result.DCS   = 0x0A
         result.CTCSS = 0x2A
 
     def prepairParameters(self, command, value=None):
-        if command == COMMANDS.LOCK_ON:
+        if command == COMMAND.LOCK_ON:
             return [0x00,0x00,0x00,0x00]
-        if command == COMMANDS.LOCK_OFF:
+        if command == COMMAND.LOCK_OFF:
             return [0x00,0x00,0x00,0x00]
-        if command == COMMANDS.SPLIT_ON:
+        if command == COMMAND.SPLIT_ON:
             return [0x00,0x00,0x00,0x00]
-        if command == COMMANDS.SPLIT_OFF:
+        if command == COMMAND.SPLIT_OFF:
             return [0x00,0x00,0x00,0x00]
-        if command == COMMANDS.SET_FREQUENCY:
+        if command == COMMAND.SET_FREQUENCY:
             result = [0x00,0x00,0x00,0x00]
             data = "{:>08d}".format(int(value/10))
             # int 99000000  Hz
@@ -71,18 +71,18 @@ class FT_817(B5):
             result[2] = int(data[4:6],16)
             result[3] = int(data[6:8],16)
             return result
-        if command == COMMANDS.SET_MODULATION:
+        if command == COMMAND.SET_MODULATION:
             opMode = self.encodeModulation(value)
             return [opMode,0x00,0x00,0x00]
-        if command == COMMANDS.READ_RX_STATE:
+        if command == COMMAND.READ_RX_STATE:
             return [0x00,0x00,0x00,0x00]
-        if command == COMMANDS.READ_TX_STATE:
+        if command == COMMAND.READ_TX_STATE:
             return [0x00,0x00,0x00,0x00]
-        if command == COMMANDS.READ_FREQ_MODE:
+        if command == COMMAND.READ_FREQ_MODE:
             return [0x00,0x00,0x00,0x00]
-        if command == COMMANDS.PTT_ON:
+        if command == COMMAND.PTT_ON:
             return [0x00,0x00,0x00,0x00]
-        if command == COMMANDS.PTT_OFF:
+        if command == COMMAND.PTT_OFF:
             return [0x00,0x00,0x00,0x00]
 
     def prepairData(self, command, parameters = [0,0,0,0]):
@@ -101,14 +101,14 @@ class FT_817(B5):
         return result
     
     def _getAnswerSize(self,command):
-        if command == COMMANDS.READ_FREQ_MODE:
+        if command == COMMAND.READ_FREQ_MODE:
             return 5
 
         return 1
 
     def _decodeAnswer(self, command,data):
         #print("<="+ str(command) +" = "+str(data))
-        if command == COMMANDS.READ_RX_STATE:
+        if command == COMMAND.READ_RX_STATE:
             smeter     = int((0b00001111 & data[0])>0)
             dCentering = int((0b00100000 & data[0])>5)
             dcsCode    = int((0b01000000 & data[0])>6)
@@ -118,7 +118,7 @@ class FT_817(B5):
             self.dcsCode.overrideValue(dcsCode)
             self.squelch.overrideValue(squelch)
 
-        if command == COMMANDS.READ_TX_STATE:
+        if command == COMMAND.READ_TX_STATE:
             pometer = int((0b00001111 & data[0])>0)
             split   = int((0b00100000 & data[0])>5)
             swr     = int((0b01000000 & data[0])>6)
@@ -128,7 +128,7 @@ class FT_817(B5):
             self.swr.overrideValue(swr)
             self.ptt.overrideValue(ptt)
 
-        if command == COMMANDS.READ_FREQ_MODE:
+        if command == COMMAND.READ_FREQ_MODE:
             frequency = "{:02X}{:02X}{:02X}{:02X}".format(data[0],data[1],data[2],data[3])
             modulation = self.decodeModulation(data[4])
             self.frequency.overrideValue(int(frequency)*10)

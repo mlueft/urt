@@ -84,7 +84,7 @@ class IProtocol():
 	#  @param commandlist   A list with commands send to the device.
 	#                       [
 	#                         [ENUM-Value, data package ],
-	#                         [Commands.SET_FREQUENCY, [000,110,200,010,01]]
+	#                         [COMMAND.SET_FREQUENCY, [000,110,200,010,01]]
 	#                       ]
 	#                       The data package is send unchanged.
 	def write(self,commandlist):
